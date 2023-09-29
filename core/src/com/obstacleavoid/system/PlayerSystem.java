@@ -3,6 +3,7 @@ package com.obstacleavoid.system;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.obstacleavoid.component.MovementComponent;
@@ -19,11 +20,13 @@ public class PlayerSystem extends IteratingSystem
             PlayerComponent.class).get();
 
     private final Viewport viewport;
+    private final ShapeRenderer renderer;
 
-
-    public PlayerSystem( Family family )
+    public PlayerSystem( Viewport viewport, ShapeRenderer renderer )
     {
-        super(family);
+        super(FAMILY);
+        this.viewport = viewport;
+        this.renderer = renderer;
     }
 
     @Override
