@@ -21,7 +21,7 @@ import com.obstacleavoid.util.Common;
 
 import static com.obstacleavoid.config.GameConfig.OBSTACLE_SIZE;
 import static com.obstacleavoid.config.GameConfig.PLAYER_SCORES_AFTER;
-import static com.obstacleavoid.util.Common.MAX_PLAYER_SPEED;
+import static com.obstacleavoid.config.GameConfig.MAX_PLAYER_X_SPEED;
 
 @Deprecated
 public class GameController
@@ -121,9 +121,9 @@ public class GameController
         float xSpeed = 0;
 
         if ( Gdx.input.isKeyPressed( Input.Keys.RIGHT)) {
-            xSpeed = MAX_PLAYER_SPEED;
+            xSpeed = MAX_PLAYER_X_SPEED;
         } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            xSpeed = -MAX_PLAYER_SPEED;
+            xSpeed = -MAX_PLAYER_X_SPEED;
         }
         
         player.setX (player.getX() + xSpeed);
