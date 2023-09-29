@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.obstacleavoid.ObstacleAvoidGame;
 import com.obstacleavoid.common.EntityFactory;
+import com.obstacleavoid.component.CircleBoundsComponent;
 import com.obstacleavoid.config.GameConfig;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
 import com.obstacleavoid.system.debug.DebugRenderSystem;
@@ -45,7 +46,8 @@ public class GameScreen implements Screen
        entityFactory = new EntityFactory(engine);
        addAllSystemsToEngine();
 
-       entityFactory.addPlayer();
+       // added so components are shown in calls
+       entityFactory.addPlayer(engine.createComponent(CircleBoundsComponent.class));
     }
 
     // system priorities on update methods in based on order added OR super(int) to EntitySystem lower# higher priority

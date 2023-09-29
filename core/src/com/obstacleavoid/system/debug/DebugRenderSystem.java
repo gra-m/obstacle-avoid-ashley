@@ -11,7 +11,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.obstacleavoid.common.Mappers;
 import com.obstacleavoid.component.CircleBoundsComponent;
 
-// requires FAMILY to iterate through them without us having to manually loop through ImmutableArray<Entity>
+/**
+ * Renders anything that has BOUNDS or to be more specific the CircleBoundsComponent
+ */
 public class DebugRenderSystem extends IteratingSystem
 {
     private static final Logger LOG = new Logger(DebugRenderSystem.class.getName(), Logger.DEBUG);
@@ -31,7 +33,7 @@ public class DebugRenderSystem extends IteratingSystem
         this.renderer = renderer;
     }
 
-    // iterates over the FAMILY (CircleBoundsComponent.class) that has been passed to super
+    // iterates over the FAMILY (CircleBoundsComponent.class) that has been passed to super for iteration
     @Override
     public void update( float deltaTime )
     {
@@ -45,8 +47,8 @@ public class DebugRenderSystem extends IteratingSystem
 
         renderer.setProjectionMatrix(viewport.getCamera( ).combined);
         renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.setColor(Color.RED);
 
+        renderer.setColor(Color.RED);
         // whole family iterated over and the processEntity method in this child class is called for each
         super.update(deltaTime);
 
@@ -66,8 +68,7 @@ public class DebugRenderSystem extends IteratingSystem
       // 1 its bounds component is retrieved (our family is built of those with this component)
       CircleBoundsComponent bc = Mappers.CIRCLE_BOUNDS_COMPONENT_MAPPER.get(entity);
       // 2 the entities bounds are rendered
-      renderer.circle(bc.bounds.x, bc.bounds.y, bc.bounds.radius);
-
+      renderer.circle(bc.bounds.x, bc.bounds.y, bc.bounds.radius, 30);
     }
 
 }
