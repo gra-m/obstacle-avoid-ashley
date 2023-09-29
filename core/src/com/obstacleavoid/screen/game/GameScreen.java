@@ -12,6 +12,7 @@ import com.obstacleavoid.ObstacleAvoidGame;
 import com.obstacleavoid.common.EntityFactory;
 import com.obstacleavoid.config.GameConfig;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
+import com.obstacleavoid.system.debug.DebugRenderSystem;
 import com.obstacleavoid.system.debug.GridRenderSystem;
 import com.obstacleavoid.util.GdxUtils;
 
@@ -52,6 +53,7 @@ public class GameScreen implements Screen
         // --> utility/void systems:
         engine.addSystem(new GridRenderSystem(viewport, renderer));
         engine.addSystem(new DebugCameraSystem(camera, GameConfig.WORLD_CENTER_X, GameConfig.WORLD_CENTER_Y));
+        engine.addSystem(new DebugRenderSystem(viewport, renderer));
     }
 
     @Override
