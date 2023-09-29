@@ -20,8 +20,7 @@ public class PlayerSystem extends IteratingSystem
     private static final Logger LOG = new Logger(PlayerSystem.class.getName( ), Logger.DEBUG);
     private static final Family FAMILY = Family.all(
             MovementComponent.class,
-            PlayerComponent.class,
-            CircleBoundsComponent.class).get( );
+            PlayerComponent.class).get( );
 
 
     public PlayerSystem( )
@@ -39,7 +38,6 @@ public class PlayerSystem extends IteratingSystem
     protected void processEntity( Entity entity, float deltaTime )
     {
         MovementComponent movementComponent = Mappers.MOVEMENT_COMPONENT_MAPPER.get(entity);
-        CircleBoundsComponent circleBoundsComponent = Mappers.CIRCLE_BOUNDS_COMPONENT_MAPPER.get(entity);
 
         // reset to 0 every call, so stopped is default
         movementComponent.xSpeed = 0;
@@ -52,7 +50,7 @@ public class PlayerSystem extends IteratingSystem
 
         if (movementComponent.xSpeed > 0) {
             LOG.debug("processEntity xSpeed = " + movementComponent.xSpeed);
-            LOG.debug("processEntity bounds = " + circleBoundsComponent.bounds);
+            // removed bounds componentLOG.debug("processEntity bounds = " + circleBoundsComponent.bounds);
         }
 
     }
