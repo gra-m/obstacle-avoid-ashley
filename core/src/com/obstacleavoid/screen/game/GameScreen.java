@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.obstacleavoid.ObstacleAvoidGame;
+import com.obstacleavoid.common.EntityFactory;
 import com.obstacleavoid.config.GameConfig;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
 import com.obstacleavoid.system.debug.GridRenderSystem;
@@ -25,6 +26,7 @@ public class GameScreen implements Screen
     private ShapeRenderer renderer;
     private PooledEngine engine;
     private boolean shown;
+    private EntityFactory entityFactory;
 
     public GameScreen( ObstacleAvoidGame game ) {
         this.obstacleAvoidGame = game;
@@ -39,9 +41,10 @@ public class GameScreen implements Screen
        viewport = new FitViewport(GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT, camera);
        renderer = new ShapeRenderer(  );
        engine = new PooledEngine(  ); // takes care of pooling automatically
-
+       entityFactory = new EntityFactory(engine);
        addAllSystemsToEngine();
 
+       entityFactory.addPlayer();
     }
 
     // system priorities on update methods in based on order added OR super(int) to EntitySystem lower# higher priority
@@ -56,8 +59,10 @@ public class GameScreen implements Screen
     {
         if (!shown) {
             LOG.debug("GameScreen -> render()\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tengine.update()");
+            LOG.debug("entities size = " + engine.getEntities().size());
             shown = true;
         }
+
         GdxUtils.clearScreen();
         engine.update(delta);
     }
