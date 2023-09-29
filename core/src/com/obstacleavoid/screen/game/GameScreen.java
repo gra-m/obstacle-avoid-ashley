@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.obstacleavoid.ObstacleAvoidGame;
 import com.obstacleavoid.config.GameConfig;
+import com.obstacleavoid.system.debug.GridRenderSystem;
 import com.obstacleavoid.util.GdxUtils;
 
 public class GameScreen implements Screen
@@ -35,6 +36,12 @@ public class GameScreen implements Screen
        renderer = new ShapeRenderer(  );
        engine = new PooledEngine(  ); // takes care of pooling automatically
 
+       addAllSystemsToEngine();
+
+    }
+
+    private void addAllSystemsToEngine( ) {
+        engine.addSystem(new GridRenderSystem(viewport, renderer));
     }
 
     @Override
