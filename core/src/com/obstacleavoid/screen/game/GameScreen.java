@@ -69,11 +69,12 @@ public class GameScreen implements Screen
         // --> utility/void systems:
         engine.addSystem(new GridRenderSystem(viewport, renderer));
         engine.addSystem(new DebugCameraSystem(camera, GameConfig.WORLD_CENTER_X, GameConfig.WORLD_CENTER_Y));
-        engine.addSystem(new DebugRenderSystem(viewport, renderer));
         engine.addSystem(new PlayerSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new WorldWrapSystem(viewport));
         engine.addSystem(new BoundsSystem());
+        // render last
+        engine.addSystem(new DebugRenderSystem(viewport, renderer));
     }
 
     @Override
