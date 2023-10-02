@@ -72,7 +72,7 @@ public class GameScreen implements Screen
         engine.addSystem(new WorldWrapSystem(viewport));
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
-        engine.addSystem(new CleanUpSystem(entityFactory));
+        engine.addSystem(new CleanUpSystem());
         // render last
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
     }

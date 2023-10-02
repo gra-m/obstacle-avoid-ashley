@@ -65,8 +65,4 @@ public class EntityFactory
         engine.addEntity(entity);
 
     }
-
-    public void removeEnitityFromEngine(Entity entity ) {
-        engine.removeEntity(entity);
-    }
 }
