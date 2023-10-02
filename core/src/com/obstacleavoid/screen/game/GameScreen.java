@@ -12,10 +12,7 @@ import com.obstacleavoid.ObstacleAvoidGame;
 import com.obstacleavoid.common.EntityFactory;
 import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
-import com.obstacleavoid.system.BoundsSystem;
-import com.obstacleavoid.system.MovementSystem;
-import com.obstacleavoid.system.ObstacleSpawnSystem;
-import com.obstacleavoid.system.PlayerSystem;
+import com.obstacleavoid.system.*;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
 import com.obstacleavoid.system.debug.DebugRenderSystem;
 import com.obstacleavoid.system.debug.GridRenderSystem;
@@ -75,9 +72,12 @@ public class GameScreen implements Screen
         engine.addSystem(new WorldWrapSystem(viewport));
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
+        engine.addSystem(new CleanUpSystem(entityFactory));
         // render last
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
     }
+
+
 
     @Override
     public void render( float delta )
