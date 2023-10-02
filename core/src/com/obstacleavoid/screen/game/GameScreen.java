@@ -13,7 +13,9 @@ import com.obstacleavoid.common.EntityFactory;
 import com.obstacleavoid.component.CircleBoundsComponent;
 import com.obstacleavoid.component.MovementComponent;
 import com.obstacleavoid.component.PlayerComponent;
+import com.obstacleavoid.component.PositionComponent;
 import com.obstacleavoid.config.GameConfig;
+import com.obstacleavoid.system.MovementSystem;
 import com.obstacleavoid.system.PlayerSystem;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
 import com.obstacleavoid.system.debug.DebugRenderSystem;
@@ -58,7 +60,8 @@ public class GameScreen implements Screen
         entityFactory.addPlayer(
                 engine.createComponent(CircleBoundsComponent.class),
                 engine.createComponent(MovementComponent.class),
-                engine.createComponent(PlayerComponent.class));
+                engine.createComponent(PlayerComponent.class),
+                engine.createComponent(PositionComponent.class));
     }
 
     // system priorities on update methods in based on order added OR super(int) to EntitySystem lower# higher priority
@@ -68,6 +71,7 @@ public class GameScreen implements Screen
         engine.addSystem(new DebugCameraSystem(camera, GameConfig.WORLD_CENTER_X, GameConfig.WORLD_CENTER_Y));
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
         engine.addSystem(new PlayerSystem());
+        engine.addSystem(new MovementSystem());
     }
 
     @Override
