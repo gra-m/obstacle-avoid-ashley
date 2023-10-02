@@ -21,6 +21,7 @@ public class PlayerSystem extends IteratingSystem
     private static final Family FAMILY = Family.all(
             MovementComponent.class,
             PlayerComponent.class).get( );
+    private int logCalmer;
 
 
     public PlayerSystem( )
@@ -45,10 +46,10 @@ public class PlayerSystem extends IteratingSystem
         if ( Gdx.input.isKeyPressed(Input.Keys.RIGHT) ) {
             movementComponent.xSpeed = GameConfig.MAX_PLAYER_X_SPEED;
         } else if ( Gdx.input.isKeyPressed(Input.Keys.LEFT) ) {
-            movementComponent.xSpeed = GameConfig.MAX_PLAYER_X_SPEED;
+            movementComponent.xSpeed = -GameConfig.MAX_PLAYER_X_SPEED;
         }
 
-        if (movementComponent.xSpeed > 0) {
+        if ((movementComponent.xSpeed > 0 || movementComponent.xSpeed < 0) && logCalmer++ % 10 == 0) {
             LOG.debug("processEntity xSpeed = " + movementComponent.xSpeed);
             // removed bounds componentLOG.debug("processEntity bounds = " + circleBoundsComponent.bounds);
         }

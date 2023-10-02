@@ -15,6 +15,7 @@ import com.obstacleavoid.component.MovementComponent;
 import com.obstacleavoid.component.PlayerComponent;
 import com.obstacleavoid.component.PositionComponent;
 import com.obstacleavoid.config.GameConfig;
+import com.obstacleavoid.system.BoundsSystem;
 import com.obstacleavoid.system.MovementSystem;
 import com.obstacleavoid.system.PlayerSystem;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
@@ -72,6 +73,7 @@ public class GameScreen implements Screen
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
         engine.addSystem(new PlayerSystem());
         engine.addSystem(new MovementSystem());
+        engine.addSystem(new BoundsSystem());
     }
 
     @Override

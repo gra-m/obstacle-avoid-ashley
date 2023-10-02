@@ -16,6 +16,7 @@ public class MovementSystem extends IteratingSystem
             PositionComponent.class,
             MovementComponent.class
     ).get();
+    private int logCalmer;
 
     public MovementSystem( )
     {
@@ -32,7 +33,9 @@ public class MovementSystem extends IteratingSystem
         float  newXPosition = positionComponent.x +=  movementComponent.xSpeed;
         float newYPosition = positionComponent.y +=  movementComponent.ySpeed;
 
-        LOG.debug("processEntity position x = " +  newXPosition + " position y = " + newYPosition);
+        if (logCalmer++ % 40 == 0) {
+            LOG.debug("processEntity position x = " + newXPosition + " position y = " + newYPosition);
+        }
 
     }
 }
