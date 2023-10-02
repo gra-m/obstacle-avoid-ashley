@@ -32,12 +32,7 @@ public class MovementSystem extends IteratingSystem
         float  newXPosition = positionComponent.x +=  movementComponent.xSpeed;
         float newYPosition = positionComponent.y +=  movementComponent.ySpeed;
 
-        CircleBoundsComponent circleBoundsComponent = Mappers.CIRCLE_BOUNDS_COMPONENT_MAPPER.get(entity);
         LOG.debug("processEntity position x = " +  newXPosition + " position y = " + newYPosition);
-
-        circleBoundsComponent.bounds.setPosition(newXPosition, newYPosition);
-
-        // update bounds
 
     }
 }
