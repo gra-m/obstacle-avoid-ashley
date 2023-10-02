@@ -15,8 +15,6 @@ public class Mappers
             ComponentMapper.getFor(CircleBoundsComponent.class);
     public static final ComponentMapper< MovementComponent > MOVEMENT_COMPONENT_MAPPER =
             ComponentMapper.getFor(MovementComponent.class);
-    public static final ComponentMapper< PlayerComponent > PLAYER_COMPONENT =
-            ComponentMapper.getFor(PlayerComponent.class);
     public static final ComponentMapper< PositionComponent > POSITION_COMPONENT_MAPPER =
             ComponentMapper.getFor(PositionComponent.class);
 

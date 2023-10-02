@@ -10,10 +10,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.obstacleavoid.ObstacleAvoidGame;
 import com.obstacleavoid.common.EntityFactory;
-import com.obstacleavoid.component.CircleBoundsComponent;
-import com.obstacleavoid.component.MovementComponent;
-import com.obstacleavoid.component.PlayerComponent;
-import com.obstacleavoid.component.PositionComponent;
+import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
 import com.obstacleavoid.system.BoundsSystem;
 import com.obstacleavoid.system.MovementSystem;
@@ -62,7 +59,8 @@ public class GameScreen implements Screen
                 engine.createComponent(CircleBoundsComponent.class),
                 engine.createComponent(MovementComponent.class),
                 engine.createComponent(PlayerComponent.class),
-                engine.createComponent(PositionComponent.class));
+                engine.createComponent(PositionComponent.class),
+                engine.createComponent(WorldWrapComponent.class));
     }
 
     // system priorities on update methods in based on order added OR super(int) to EntitySystem lower# higher priority

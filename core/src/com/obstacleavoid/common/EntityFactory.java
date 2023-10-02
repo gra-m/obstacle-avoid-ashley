@@ -2,10 +2,7 @@ package com.obstacleavoid.common;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.obstacleavoid.component.CircleBoundsComponent;
-import com.obstacleavoid.component.MovementComponent;
-import com.obstacleavoid.component.PlayerComponent;
-import com.obstacleavoid.component.PositionComponent;
+import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
 import org.graalvm.compiler.lir.sparc.SPARCMove;
 
@@ -21,7 +18,8 @@ public class EntityFactory
     public void addPlayer( CircleBoundsComponent circleBoundsComponent,
                            MovementComponent movementComponent,
                            PlayerComponent playerComponent,
-                           PositionComponent positionComponent ) {
+                           PositionComponent positionComponent,
+                           WorldWrapComponent worldWrapComponent ) {
         // original position
        float x = GameConfig.WORLD_WIDTH / 2f;
        positionComponent.x = x;
@@ -35,6 +33,7 @@ public class EntityFactory
         entity.add(movementComponent);
         entity.add(playerComponent);
         entity.add(positionComponent);
+        entity.add(worldWrapComponent);
         engine.addEntity(entity);
     }
 }
