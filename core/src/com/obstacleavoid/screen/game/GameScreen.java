@@ -18,6 +18,7 @@ import com.obstacleavoid.system.PlayerSystem;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
 import com.obstacleavoid.system.debug.DebugRenderSystem;
 import com.obstacleavoid.system.debug.GridRenderSystem;
+import com.obstacleavoid.system.debug.WorldWrapSystem;
 import com.obstacleavoid.util.GdxUtils;
 
 public class GameScreen implements Screen
@@ -71,6 +72,7 @@ public class GameScreen implements Screen
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
         engine.addSystem(new PlayerSystem());
         engine.addSystem(new MovementSystem());
+        engine.addSystem(new WorldWrapSystem(viewport));
         engine.addSystem(new BoundsSystem());
     }
 
