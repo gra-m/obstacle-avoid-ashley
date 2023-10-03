@@ -74,4 +74,7 @@ public class GameManager
         score = 0;
     }
 
+    public void updateScore( int scored ) {
+        score += scored;
+    }
 }

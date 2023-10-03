@@ -111,6 +111,7 @@ public class GameScreen implements Screen
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
         engine.addSystem(new CleanUpSystem());
         engine.addSystem(new CollisionSystem(listener));
+        engine.addSystem(new ScoreSystem());
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
         engine.addSystem((new HudRenderSystem(hudViewport, obstacleAvoidGame.getSpriteBatch(), font)));
     }
