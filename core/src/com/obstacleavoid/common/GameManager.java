@@ -68,4 +68,10 @@ public class GameManager
     {
         return score;
     }
+
+    public void reset() {
+        lives = GameConfig.PLAYER_INITIAL_LIVES;
+        score = 0;
+    }
+
 }

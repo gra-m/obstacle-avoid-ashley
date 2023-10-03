@@ -130,6 +130,7 @@ public class GameScreen implements Screen
         engine.update(delta);
 
         if ( GameManager.INSTANCE.isGameOver( ) ) {
+            GameManager.INSTANCE.reset();
             obstacleAvoidGame.setScreen(new MenuScreen(obstacleAvoidGame));
         }
     }
