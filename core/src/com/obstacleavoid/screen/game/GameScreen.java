@@ -13,6 +13,7 @@ import com.obstacleavoid.common.EntityFactory;
 import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
 import com.obstacleavoid.system.*;
+import com.obstacleavoid.system.collision.CollisionSystem;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
 import com.obstacleavoid.system.debug.DebugRenderSystem;
 import com.obstacleavoid.system.debug.GridRenderSystem;
@@ -60,6 +61,7 @@ public class GameScreen implements Screen
                 engine.createComponent(PlayerComponent.class),
                 engine.createComponent(PositionComponent.class),
                 engine.createComponent(WorldWrapComponent.class));
+
     }
 
     // system priorities on update methods in based on order added OR super(int) to EntitySystem lower# higher priority
@@ -73,6 +75,7 @@ public class GameScreen implements Screen
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
         engine.addSystem(new CleanUpSystem());
+        engine.addSystem(new CollisionSystem());
         // render last
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
     }

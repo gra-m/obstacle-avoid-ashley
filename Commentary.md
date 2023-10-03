@@ -9,3 +9,4 @@
 
 ### 142. CollisionSystem
 * Requires two families, instead of extending IteratingSystem, extends EntitySystem
+* requires Intersector.overlaps(bounds, bounds); 
