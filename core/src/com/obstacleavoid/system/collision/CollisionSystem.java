@@ -16,6 +16,10 @@ public class CollisionSystem extends EntitySystem
     private static final Logger LOG = new Logger(CollisionSystem.class.getName(), Logger.DEBUG);
     private static final Family PLAYER_FAMILY = Family.all(PlayerComponent.class, CircleBoundsComponent.class).get();
     private static final Family OBSTACLE_FAMILY = Family.all(ObstacleComponent.class, CircleBoundsComponent.class).get();
+    private final CollisionListener listener;
+
+    public CollisionSystem( CollisionListener listener ){ this.listener = listener; }
+
 
     @Override
     public void update( float deltaTime )
@@ -33,6 +37,7 @@ public class CollisionSystem extends EntitySystem
                 if (checkCollision(playerEntity, obstacleEntity)) {
                     obstacleComponent.hitAlready = true;
                     LOG.debug("collision with obstacle");
+                    collisionListener.hitObstacle();
                 }
             }
         }

@@ -2,11 +2,9 @@ package com.obstacleavoid.screen.game;
 
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -17,6 +15,7 @@ import com.obstacleavoid.common.EntityFactory;
 import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
 import com.obstacleavoid.system.*;
+import com.obstacleavoid.system.collision.CollisionListener;
 import com.obstacleavoid.system.collision.CollisionSystem;
 import com.obstacleavoid.system.debug.DebugCameraSystem;
 import com.obstacleavoid.system.debug.DebugRenderSystem;
@@ -45,6 +44,15 @@ public class GameScreen implements Screen
         this.obstacleAvoidGame = game;
         this.assetManager = obstacleAvoidGame.getAssetManager();
     }
+
+    CollisionListener listener = new CollisionListener( )
+    {
+        @Override
+        public void hitObstacle( )
+        {
+
+        }
+    };
 
     @Override
     public void show()
@@ -87,7 +95,7 @@ public class GameScreen implements Screen
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
         engine.addSystem(new CleanUpSystem());
-        engine.addSystem(new CollisionSystem());
+        engine.addSystem(new CollisionSystem(listener));
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
         engine.addSystem((new HudRenderSystem(hudViewport, obstacleAvoidGame.getSpriteBatch(), font)));
     }

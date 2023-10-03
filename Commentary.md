@@ -26,3 +26,8 @@ public class GameScreen implements Screen
     }
 }
 ```
+### 144. Collision Listener
+* This is about creating an interface to save having so many game related fields needing to be sent to a system. Instead
+* the CollisionListener Interface is implemented and sent to the system.
+* After rendering is completed check for game over, exiting to a new screen before an active render is completed leads to crashes.
+* 
