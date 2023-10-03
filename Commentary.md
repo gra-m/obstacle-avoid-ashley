@@ -30,4 +30,23 @@ public class GameScreen implements Screen
 * This is about creating an interface to save having so many game related fields needing to be sent to a system. Instead
 * the CollisionListener Interface is implemented and sent to the system.
 * After rendering is completed check for game over, exiting to a new screen before an active render is completed leads to crashes.
-* 
+* Game reset below:
+
+```java
+import java.awt.desktop.ScreenSleepListener;
+
+public class GameScreen implements Screen
+{
+    @Override
+    public void render( float delta )
+    {
+        GdxUtils.clearScreen();
+        engine.update(delta);
+
+        if ( GameManager.INSTANCE.isGameOver( ) ) {
+            obstacleAvoidGame.setScreen(new MenuScreen(obstacleAvoidGame));
+        }
+    }
+}
+
+```
