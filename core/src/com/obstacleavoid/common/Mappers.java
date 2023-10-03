@@ -1,10 +1,7 @@
 package com.obstacleavoid.common;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import com.obstacleavoid.component.CircleBoundsComponent;
-import com.obstacleavoid.component.MovementComponent;
-import com.obstacleavoid.component.PlayerComponent;
-import com.obstacleavoid.component.PositionComponent;
+import com.obstacleavoid.component.*;
 
 
 // used to retrieve the components with the underlying data that was fed in when the entity was created.
@@ -17,6 +14,7 @@ public class Mappers
             ComponentMapper.getFor(MovementComponent.class);
     public static final ComponentMapper< PositionComponent > POSITION_COMPONENT_MAPPER =
             ComponentMapper.getFor(PositionComponent.class);
-
+    public static final ComponentMapper< ObstacleComponent > OBSTACLE_COMPONENT_MAPPER =
+            ComponentMapper.getFor(ObstacleComponent.class);
     private Mappers(){}
 }

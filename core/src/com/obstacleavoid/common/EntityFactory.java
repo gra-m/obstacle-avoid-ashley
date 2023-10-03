@@ -45,6 +45,7 @@ public class EntityFactory
         MovementComponent  movementComponent = engine.createComponent(MovementComponent.class);
         PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
         CleanUpComponent cleanUpComponent = engine.createComponent(CleanUpComponent.class);
+        ObstacleComponent obstacleComponent = engine.createComponent(ObstacleComponent.class);
 
         circleBoundsComponent.bounds.set(newObstacleX, newObstacleY, GameConfig.OBSTACLE_BOUNDS_RADIUS);
 
@@ -60,7 +61,7 @@ public class EntityFactory
         entity.add(movementComponent);
         entity.add(positionComponent);
         entity.add(cleanUpComponent);
-        
+        entity.add(obstacleComponent);
 
         engine.addEntity(entity);
 
