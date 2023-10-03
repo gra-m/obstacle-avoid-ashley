@@ -2,13 +2,17 @@ package com.obstacleavoid.screen.game;
 
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.obstacleavoid.ObstacleAvoidGame;
+import com.obstacleavoid.assets.AssetDescriptors;
 import com.obstacleavoid.common.EntityFactory;
 import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
@@ -33,6 +37,10 @@ public class GameScreen implements Screen
     private boolean shown;
     private EntityFactory entityFactory;
 
+    private Viewport hudViewport;
+    private BitmapFont font;
+
+
     public GameScreen( ObstacleAvoidGame game ) {
         this.obstacleAvoidGame = game;
         this.assetManager = obstacleAvoidGame.getAssetManager();
@@ -44,6 +52,10 @@ public class GameScreen implements Screen
        LOG.debug("GameScreen -> show()");
        camera = new OrthographicCamera(  );
        viewport = new FitViewport(GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT, camera);
+       hudViewport = new FitViewport(GameConfig.HUD_WIDTH, GameConfig.HUD_HEIGHT);
+       font = assetManager.get(AssetDescriptors.UI_FONT_32);
+
+
        renderer = new ShapeRenderer(  );
        engine = new PooledEngine(  ); // takes care of pooling automatically
        entityFactory = new EntityFactory(engine);
@@ -76,8 +88,8 @@ public class GameScreen implements Screen
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
         engine.addSystem(new CleanUpSystem());
         engine.addSystem(new CollisionSystem());
-        // render last
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
+        engine.addSystem((new HudRenderSystem(hudViewport, obstacleAvoidGame.getSpriteBatch(), font)));
     }
 
 
@@ -100,6 +112,7 @@ public class GameScreen implements Screen
     {
         LOG.debug("GameScreen -> resize()");
         viewport.update(width, height, true);
+        hudViewport.update(width, height, true);
     }
 
     @Override

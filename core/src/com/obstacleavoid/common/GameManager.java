@@ -3,12 +3,15 @@ package com.obstacleavoid.common;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.obstacleavoid.ObstacleAvoidGame;
+import com.obstacleavoid.config.GameConfig;
 import com.obstacleavoid.config.GameDifficulty;
 
 // saved in userprofile dir .prefs on WINDOWS systems
 public class GameManager
 {
     public static final GameManager INSTANCE = new GameManager();
+    private int lives = GameConfig.PLAYER_INITIAL_LIVES;
+    private int score;
     private static final String HIGH_SCORE_KEY = "highscore";
     private static final String DIFFICULTY_KEY = "difficulty";
     private Preferences prefs;
@@ -44,5 +47,15 @@ public class GameManager
 
     public GameDifficulty getGameDifficulty() {
         return gameDifficulty;
+    }
+
+    public int getLives( )
+    {
+        return lives;
+    }
+
+    public int getScore( )
+    {
+        return score;
     }
 }
