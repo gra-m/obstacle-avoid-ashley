@@ -25,7 +25,7 @@ public class GameManager
         gameDifficulty = GameDifficulty.valueOf( difficultyName );
     }
 
-    public void updateHighScore(int score) {
+    public void updateHighScore() {
         if (score > highScore) {
             prefs.putInteger( HIGH_SCORE_KEY, score );
             prefs.flush(); // save prefs
@@ -54,6 +54,16 @@ public class GameManager
         return lives;
     }
 
+    public void decrementLives(){
+        if (lives > 0)
+            lives--;
+    }
+
+    public boolean isGameOver() {
+        return lives == 0;
+    }
+
+    
     public int getScore( )
     {
         return score;

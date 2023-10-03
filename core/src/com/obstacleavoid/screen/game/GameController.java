@@ -77,7 +77,7 @@ public class GameController
             lives--;
             if ( isGameOver( ) ) {
                 LOG.debug( "Game Over" );
-                GameManager.INSTANCE.updateHighScore( score );
+                //GameManager.INSTANCE.updateHighScore( score );
             } else {
                 restart( );
             }

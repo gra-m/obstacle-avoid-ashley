@@ -37,7 +37,7 @@ public class CollisionSystem extends EntitySystem
                 if (checkCollision(playerEntity, obstacleEntity)) {
                     obstacleComponent.hitAlready = true;
                     LOG.debug("collision with obstacle");
-                    collisionListener.hitObstacle();
+                    listener.hitObstacle();
                 }
             }
         }

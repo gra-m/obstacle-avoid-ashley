@@ -3,6 +3,7 @@ package com.obstacleavoid.screen.game;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -12,8 +13,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.obstacleavoid.ObstacleAvoidGame;
 import com.obstacleavoid.assets.AssetDescriptors;
 import com.obstacleavoid.common.EntityFactory;
+import com.obstacleavoid.common.GameManager;
 import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
+import com.obstacleavoid.screen.menu.MenuScreen;
 import com.obstacleavoid.system.*;
 import com.obstacleavoid.system.collision.CollisionListener;
 import com.obstacleavoid.system.collision.CollisionSystem;
@@ -35,6 +38,7 @@ public class GameScreen implements Screen
     private PooledEngine engine;
     private boolean shown;
     private EntityFactory entityFactory;
+    private Sound hit;
 
     private Viewport hudViewport;
     private BitmapFont font;
@@ -50,6 +54,16 @@ public class GameScreen implements Screen
         @Override
         public void hitObstacle( )
         {
+            GameManager.INSTANCE.decrementLives();
+            hit.play();
+            
+            if ( GameManager.INSTANCE.isGameOver( ) ) {
+                GameManager.INSTANCE.updateHighScore();
+            } else {
+                engine.removeAllEntities();
+                addPlayer();
+            }
+                
 
         }
     };
@@ -62,6 +76,7 @@ public class GameScreen implements Screen
        viewport = new FitViewport(GameConfig.WORLD_WIDTH, GameConfig.WORLD_HEIGHT, camera);
        hudViewport = new FitViewport(GameConfig.HUD_WIDTH, GameConfig.HUD_HEIGHT);
        font = assetManager.get(AssetDescriptors.UI_FONT_32);
+       hit = assetManager.get(AssetDescriptors.CRASH_WAV);
 
 
        renderer = new ShapeRenderer(  );
@@ -113,6 +128,10 @@ public class GameScreen implements Screen
 
         GdxUtils.clearScreen();
         engine.update(delta);
+
+        if ( GameManager.INSTANCE.isGameOver( ) ) {
+            obstacleAvoidGame.setScreen(new MenuScreen(obstacleAvoidGame));
+        }
     }
 
     @Override
