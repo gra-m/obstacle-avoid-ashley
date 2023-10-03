@@ -50,3 +50,12 @@ public class GameScreen implements Screen
 }
 
 ```
+### 146. RenderSystem
+* Have rendered debug elements and hud but now to replace renderGamePlay() in a system the components are:
+  * Position
+  * Texture
+  * Dimension
+
+
+
+
