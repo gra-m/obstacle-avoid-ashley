@@ -33,8 +33,8 @@ public class WorldWrapSystem extends IteratingSystem
         PositionComponent positionComponent = Mappers.POSITION_COMPONENT_MAPPER.get(entity);
 
         // clamp positions:
-        positionComponent.x = MathUtils.clamp(positionComponent.x, 0 + GameConfig.PLAYER_BOUNDS_RADIUS,
-                viewport.getWorldWidth() - GameConfig.PLAYER_BOUNDS_RADIUS);
+        positionComponent.x = MathUtils.clamp(positionComponent.x, 0,
+                viewport.getWorldWidth() - GameConfig.PLAYER_SIZE);
         positionComponent.y = MathUtils.clamp(positionComponent.y, 0 + GameConfig.PLAYER_BOUNDS_RADIUS,
                 viewport.getWorldHeight() - GameConfig.PLAYER_BOUNDS_RADIUS) ;
 

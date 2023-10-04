@@ -121,7 +121,7 @@ public class GameScreen implements Screen
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
         engine.addSystem(new CleanUpSystem());
-        engine.addSystem(new CollisionSystem(listener));
+        //engine.addSystem(new CollisionSystem(listener));
         engine.addSystem(new ScoreSystem());
 
         // render order
