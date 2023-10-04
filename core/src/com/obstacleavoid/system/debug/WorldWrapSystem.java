@@ -39,7 +39,7 @@ public class WorldWrapSystem extends IteratingSystem
         positionComponent.x = MathUtils.clamp(positionComponent.x, 0,
                 viewport.getWorldWidth() - dimensionComponent.width);
         // add up and down to listener to enable this.
-        positionComponent.y = MathUtils.clamp(positionComponent.y, 0 + dimensionComponent.height/2,
+        positionComponent.y = MathUtils.clamp(positionComponent.y, 0 + (dimensionComponent.height / 2),
                 viewport.getWorldHeight() - dimensionComponent.height) ;
 
     }
