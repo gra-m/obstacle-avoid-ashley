@@ -7,6 +7,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.obstacleavoid.common.Mappers;
 import com.obstacleavoid.component.DimensionComponent;
 import com.obstacleavoid.component.PositionComponent;
 import com.obstacleavoid.component.TextureComponent;
@@ -45,11 +46,21 @@ public class RenderSystem extends EntitySystem
 
         batch.end();
 
-        
+        renderQueue.clear();// cleared every tick
 
     }
 
     private void draw( ) {
+        for(Entity entity: renderQueue) {
+            PositionComponent positionComponent = Mappers.POSITION_COMPONENT_MAPPER.get(entity);
+            DimensionComponent dimensionComponent = Mappers.DIMENSION_COMPONENT_MAPPER.get(entity);
+            TextureComponent textureComponent = Mappers.TEXTURE_COMPONENT_MAPPER.get(entity);
+
+            batch.draw(textureComponent.region, positionComponent.x, positionComponent.y, dimensionComponent.width,
+                    dimensionComponent.height);
+
+
+        }
         
     }
 }
