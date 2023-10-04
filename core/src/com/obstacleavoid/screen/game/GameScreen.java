@@ -81,7 +81,7 @@ public class GameScreen implements Screen
 
        renderer = new ShapeRenderer(  );
        engine = new PooledEngine(  ); // takes care of pooling automatically
-       entityFactory = new EntityFactory(engine, assetManager.get(AssetDescriptors.GAMEPLAY_ATlAS));
+       entityFactory = new EntityFactory(engine, assetManager);
        addAllSystemsToEngine();
 
        // added so components are shown in calls

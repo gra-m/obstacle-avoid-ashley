@@ -5,18 +5,21 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.obstacleavoid.assets.AssetDescriptors;
+import com.obstacleavoid.assets.RegionNames;
 import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
 
 public class EntityFactory
 {
     private PooledEngine engine;
+    private final AssetManager assetManager;
     private final TextureAtlas gameplayAtlas;
 
-    public EntityFactory( PooledEngine engine, TextureAtlas gameplayAtlas)
+    public EntityFactory( PooledEngine engine, AssetManager assetManager)
     {
         this.engine = engine;
-        this.gameplayAtlas = gameplayAtlas;
+        this.assetManager = assetManager;
+        this.gameplayAtlas = this.assetManager.get(AssetDescriptors.GAMEPLAY_ATlAS);
     }
 
 
@@ -38,7 +41,7 @@ public class EntityFactory
         dimensionComponent.height = GameConfig.PLAYER_SIZE;
         dimensionComponent.width = GameConfig.PLAYER_SIZE;
 
-        textureComponent.region = gameplayAtlas.findRegion("player");
+        textureComponent.region = gameplayAtlas.findRegion(RegionNames.PLAYER);
 
         Entity entity = engine.createEntity();
         entity.add(circleBoundsComponent);
@@ -53,11 +56,15 @@ public class EntityFactory
 
 
     public void addObstacle(float newObstacleX, float newObstacleY){
+
+        ObstacleComponent obstacleComponent = engine.createComponent(ObstacleComponent.class);
+        CleanUpComponent cleanUpComponent = engine.createComponent(CleanUpComponent.class);
+
         CircleBoundsComponent circleBoundsComponent = engine.createComponent(CircleBoundsComponent.class);
         MovementComponent  movementComponent = engine.createComponent(MovementComponent.class);
         PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        CleanUpComponent cleanUpComponent = engine.createComponent(CleanUpComponent.class);
-        ObstacleComponent obstacleComponent = engine.createComponent(ObstacleComponent.class);
+        DimensionComponent dimensionComponent = engine.createComponent(DimensionComponent.class);
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
 
         circleBoundsComponent.bounds.set(newObstacleX, newObstacleY, GameConfig.OBSTACLE_BOUNDS_RADIUS);
 
@@ -67,13 +74,21 @@ public class EntityFactory
         positionComponent.x = newObstacleX;
         positionComponent.y = newObstacleY;
 
+        dimensionComponent.width = GameConfig.OBSTACLE_SIZE;
+        dimensionComponent.height = GameConfig.OBSTACLE_SIZE;
+
+        textureComponent.region = gameplayAtlas.findRegion(RegionNames.OBSTACLE);
+
+
         Entity entity = engine.createEntity();
+        entity.add(obstacleComponent);
+        entity.add(cleanUpComponent);
 
         entity.add(circleBoundsComponent);
         entity.add(movementComponent);
         entity.add(positionComponent);
-        entity.add(cleanUpComponent);
-        entity.add(obstacleComponent);
+        entity.add(dimensionComponent);
+        entity.add(textureComponent);
 
         engine.addEntity(entity);
 
