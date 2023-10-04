@@ -68,10 +68,48 @@ public class EntityFactory
         engine.addEntity(entity);
     }
 
+    // Create spawner, how check no obstacle on X? not going to.
+    public void addLifeCollectable(float newLifeCollectableX, float newLifeCollectableY) {
+        HittableCollectableComponent hittableCollectableComponent = engine.createComponent(HittableCollectableComponent.class);
+        CleanUpComponent cleanUpComponent = engine.createComponent(CleanUpComponent.class);
+
+        CircleBoundsComponent circleBoundsComponent = engine.createComponent(CircleBoundsComponent.class);
+        MovementComponent  movementComponent = engine.createComponent(MovementComponent.class);
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        DimensionComponent dimensionComponent = engine.createComponent(DimensionComponent.class);
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+
+        circleBoundsComponent.bounds.set(newLifeCollectableX, newLifeCollectableY, GameConfig.LIFE_COLLECTABLE_BOUNDS_RADIUS);
+
+        movementComponent.xSpeed = 0f;
+        movementComponent.ySpeed = -GameConfig.HARD_OBSTACLE_SPEED;
+
+        positionComponent.x = newLifeCollectableX;
+        positionComponent.y = newLifeCollectableY;
+
+        dimensionComponent.width = GameConfig.LIFE_COLLECTABLE_SIZE;
+        dimensionComponent.height = GameConfig.LIFE_COLLECTABLE_SIZE;
+
+        textureComponent.region = gameplayAtlas.findRegion(RegionNames.LIFE_COLLECTABLE);
+
+        Entity entity = engine.createEntity();
+        entity.add(hittableCollectableComponent);
+        entity.add(cleanUpComponent);
+
+        entity.add(circleBoundsComponent);
+        entity.add(movementComponent);
+        entity.add(positionComponent);
+        entity.add(dimensionComponent);
+        entity.add(textureComponent);
+
+        engine.addEntity(entity);
+
+    }
+
 
     public void addObstacle(float newObstacleX, float newObstacleY){
 
-        ObstacleComponent obstacleComponent = engine.createComponent(ObstacleComponent.class);
+        HittableCollectableComponent hittableCollectableComponent = engine.createComponent(HittableCollectableComponent.class);
         CleanUpComponent cleanUpComponent = engine.createComponent(CleanUpComponent.class);
 
         CircleBoundsComponent circleBoundsComponent = engine.createComponent(CircleBoundsComponent.class);
@@ -95,7 +133,7 @@ public class EntityFactory
 
 
         Entity entity = engine.createEntity();
-        entity.add(obstacleComponent);
+        entity.add(hittableCollectableComponent);
         entity.add(cleanUpComponent);
 
         entity.add(circleBoundsComponent);

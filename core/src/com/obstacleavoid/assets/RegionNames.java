@@ -4,6 +4,7 @@ public class RegionNames
 {
     // == gameplay.atlas
     public static final String PLAYER = "player";
+    public static final String LIFE_COLLECTABLE = "player"; // shares player texture
     public static final String OBSTACLE = "obstacle";
     public static final String BACKGROUND = "background";
 

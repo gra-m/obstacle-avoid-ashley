@@ -60,6 +60,11 @@ public class GameManager
             lives--;
     }
 
+    public void incrementLives(){
+        if (lives > 0) // just check if dead already.
+            lives++;
+    }
+
     public boolean isGameOver() {
         return lives == 0;
     }

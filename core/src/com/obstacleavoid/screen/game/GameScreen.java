@@ -68,6 +68,16 @@ public class GameScreen implements Screen
                 
 
         }
+
+        @Override
+        public void collectedLife( )
+        {
+            GameManager.INSTANCE.incrementLives();
+            hit.play();
+            hit.play();
+            hit.play();
+
+        }
     };
 
     @Override
@@ -121,6 +131,7 @@ public class GameScreen implements Screen
         engine.addSystem(new WorldWrapSystem(viewport));
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
+        engine.addSystem(new LifeCollectableSpawnSystem(entityFactory));
         engine.addSystem(new CleanUpSystem());
         engine.addSystem(collisionSystem);
         engine.addSystem(new ScoreSystem());
