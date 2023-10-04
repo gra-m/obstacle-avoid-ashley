@@ -28,6 +28,7 @@ import com.obstacleavoid.util.GdxUtils;
 
 public class GameScreen implements Screen
 {
+    private static final boolean DEBUG = false;
     private static final Logger LOG = new Logger(GameScreen.class.getName(), Logger.DEBUG);
     private final ObstacleAvoidGame obstacleAvoidGame;
     private final AssetManager assetManager;
@@ -113,21 +114,25 @@ public class GameScreen implements Screen
 
     // system priorities on update methods in based on order added OR super(int) to EntitySystem lower# higher priority
     private void addAllSystemsToEngine( ) {
-        // --> utility/void systems:
-        engine.addSystem(new DebugCameraSystem(camera, GameConfig.WORLD_CENTER_X, GameConfig.WORLD_CENTER_Y));
+        CollisionSystem collisionSystem = new CollisionSystem(listener);
+
         engine.addSystem(new PlayerSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new WorldWrapSystem(viewport));
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new ObstacleSpawnSystem(entityFactory));
         engine.addSystem(new CleanUpSystem());
-        //engine.addSystem(new CollisionSystem(listener));
+        engine.addSystem(collisionSystem);
         engine.addSystem(new ScoreSystem());
 
         // render order
         engine.addSystem(new RenderSystem(viewport, obstacleAvoidGame.getSpriteBatch()));
-        engine.addSystem(new GridRenderSystem(viewport, renderer));
-        engine.addSystem(new DebugRenderSystem(viewport, renderer));
+        if (DEBUG) {
+            engine.addSystem(new DebugCameraSystem(camera, GameConfig.WORLD_CENTER_X, GameConfig.WORLD_CENTER_Y));
+            engine.addSystem(new GridRenderSystem(viewport, renderer));
+            engine.addSystem(new DebugRenderSystem(viewport, renderer));
+            engine.removeSystem(collisionSystem);
+        }
         engine.addSystem((new HudRenderSystem(hudViewport, obstacleAvoidGame.getSpriteBatch(), font)));
     }
 
