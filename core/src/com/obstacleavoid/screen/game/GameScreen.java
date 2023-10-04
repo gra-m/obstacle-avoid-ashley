@@ -104,7 +104,6 @@ public class GameScreen implements Screen
     // system priorities on update methods in based on order added OR super(int) to EntitySystem lower# higher priority
     private void addAllSystemsToEngine( ) {
         // --> utility/void systems:
-        engine.addSystem(new GridRenderSystem(viewport, renderer));
         engine.addSystem(new DebugCameraSystem(camera, GameConfig.WORLD_CENTER_X, GameConfig.WORLD_CENTER_Y));
         engine.addSystem(new PlayerSystem());
         engine.addSystem(new MovementSystem());
@@ -114,6 +113,10 @@ public class GameScreen implements Screen
         engine.addSystem(new CleanUpSystem());
         engine.addSystem(new CollisionSystem(listener));
         engine.addSystem(new ScoreSystem());
+
+        // render order
+        engine.addSystem(new RenderSystem(viewport, obstacleAvoidGame.getSpriteBatch()));
+        engine.addSystem(new GridRenderSystem(viewport, renderer));
         engine.addSystem(new DebugRenderSystem(viewport, renderer));
         engine.addSystem((new HudRenderSystem(hudViewport, obstacleAvoidGame.getSpriteBatch(), font)));
     }
