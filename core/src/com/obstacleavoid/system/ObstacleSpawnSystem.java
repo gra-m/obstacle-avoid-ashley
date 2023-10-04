@@ -17,8 +17,8 @@ private final EntityFactory factory;
     @Override
     protected void updateInterval( )
     {
-        float min = 0 + GameConfig.OBSTACLE_BOUNDS_RADIUS;
-        float max = GameConfig.WORLD_WIDTH - GameConfig.OBSTACLE_BOUNDS_RADIUS;
+        float min = 0;
+        float max = GameConfig.WORLD_WIDTH - GameConfig.OBSTACLE_SIZE;
 
         float obstacleX = MathUtils.random(min, max);
         float obstacleY = GameConfig.WORLD_HEIGHT + GameConfig.OBSTACLE_SIZE;
