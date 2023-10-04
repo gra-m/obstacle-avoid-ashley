@@ -22,6 +22,20 @@ public class EntityFactory
         this.gameplayAtlas = this.assetManager.get(AssetDescriptors.GAMEPLAY_ATlAS);
     }
 
+    public void addBackground( PositionComponent positionComponent, DimensionComponent dimensionComponent, TextureComponent textureComponent ) {
+        positionComponent.x = 0f;
+        positionComponent.y= 0f;
+        dimensionComponent.width = GameConfig.WORLD_WIDTH;
+        dimensionComponent.height = GameConfig.WORLD_HEIGHT;
+        textureComponent.region = gameplayAtlas.findRegion(RegionNames.BACKGROUND);
+
+        Entity entity = engine.createEntity();
+        entity.add(positionComponent);
+        entity.add(dimensionComponent);
+        entity.add(textureComponent);
+        engine.addEntity(entity);
+    }
+
 
     public void addPlayer( CircleBoundsComponent circleBoundsComponent,
                            MovementComponent movementComponent,

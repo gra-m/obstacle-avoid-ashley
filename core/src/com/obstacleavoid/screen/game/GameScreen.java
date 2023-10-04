@@ -61,6 +61,7 @@ public class GameScreen implements Screen
                 GameManager.INSTANCE.updateHighScore();
             } else {
                 engine.removeAllEntities();
+                createBackgroundComponentsAndAddBackground();
                 createPlayerComponentsAndAddPlayer();
             }
                 
@@ -85,7 +86,16 @@ public class GameScreen implements Screen
        addAllSystemsToEngine();
 
        // added so components are shown in calls
+       createBackgroundComponentsAndAddBackground();
        createPlayerComponentsAndAddPlayer();
+    }
+
+    private void createBackgroundComponentsAndAddBackground( ) {
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        DimensionComponent dimensionComponent = engine.createComponent(DimensionComponent.class);
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+        entityFactory.addBackground(positionComponent, dimensionComponent, textureComponent);
+
     }
 
     private void createPlayerComponentsAndAddPlayer( ) {
