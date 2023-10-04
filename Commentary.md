@@ -56,6 +56,9 @@ public class GameScreen implements Screen
   * Texture
   * Dimension
 
-
+### 148. Ashley version of obstacle-avoid complete
+As it was stopping here I kept it simple and refactored hitAlready to hitOrCollectedAlready and split the Listener into obstacleHit lifeCollected based on bounds radius.
+System and component table below: 
+https://airtable.com/appFJaoTaI5HcCzEd/tblKGwKax6F7z6CoC/viwJULCzcHITjFTt1?blocks=hide
 
 
