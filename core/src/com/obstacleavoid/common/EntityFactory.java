@@ -45,9 +45,9 @@ public class EntityFactory
                            DimensionComponent dimensionComponent,
                            TextureComponent textureComponent) {
         // original position
-       float x = GameConfig.WORLD_WIDTH / 2f;
+       float x = (GameConfig.WORLD_WIDTH - GameConfig.PLAYER_SIZE) / 2f;
        positionComponent.x = x;
-       float y = GameConfig.PLAYER_SIZE;
+       float y = 1 - (GameConfig.PLAYER_SIZE / 2f);
        positionComponent.y = y;
 
         circleBoundsComponent.bounds.set(x, y, GameConfig.PLAYER_BOUNDS_RADIUS);
