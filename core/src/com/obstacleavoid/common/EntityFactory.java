@@ -2,18 +2,21 @@ package com.obstacleavoid.common;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.obstacleavoid.assets.AssetDescriptors;
 import com.obstacleavoid.component.*;
 import com.obstacleavoid.config.GameConfig;
-import com.obstacleavoid.config.GameDifficulty;
-import org.graalvm.compiler.lir.sparc.SPARCMove;
 
 public class EntityFactory
 {
     private PooledEngine engine;
+    private final TextureAtlas gameplayAtlas;
 
-    public EntityFactory( PooledEngine engine )
+    public EntityFactory( PooledEngine engine, TextureAtlas gameplayAtlas)
     {
         this.engine = engine;
+        this.gameplayAtlas = gameplayAtlas;
     }
 
 
@@ -21,7 +24,9 @@ public class EntityFactory
                            MovementComponent movementComponent,
                            PlayerComponent playerComponent,
                            PositionComponent positionComponent,
-                           WorldWrapComponent worldWrapComponent ) {
+                           WorldWrapComponent worldWrapComponent,
+                           DimensionComponent dimensionComponent,
+                           TextureComponent textureComponent) {
         // original position
        float x = GameConfig.WORLD_WIDTH / 2f;
        positionComponent.x = x;
@@ -30,12 +35,19 @@ public class EntityFactory
 
         circleBoundsComponent.bounds.set(x, y, GameConfig.PLAYER_BOUNDS_RADIUS);
 
+        dimensionComponent.height = GameConfig.PLAYER_SIZE;
+        dimensionComponent.width = GameConfig.PLAYER_SIZE;
+
+        textureComponent.region = gameplayAtlas.findRegion("player");
+
         Entity entity = engine.createEntity();
         entity.add(circleBoundsComponent);
         entity.add(movementComponent);
         entity.add(playerComponent);
         entity.add(positionComponent);
         entity.add(worldWrapComponent);
+        entity.add(dimensionComponent);
+        entity.add(textureComponent);
         engine.addEntity(entity);
     }
 

@@ -61,7 +61,7 @@ public class GameScreen implements Screen
                 GameManager.INSTANCE.updateHighScore();
             } else {
                 engine.removeAllEntities();
-                addPlayer();
+                createPlayerComponentsAndAddPlayer();
             }
                 
 
@@ -81,21 +81,23 @@ public class GameScreen implements Screen
 
        renderer = new ShapeRenderer(  );
        engine = new PooledEngine(  ); // takes care of pooling automatically
-       entityFactory = new EntityFactory(engine);
+       entityFactory = new EntityFactory(engine, assetManager.get(AssetDescriptors.GAMEPLAY_ATlAS));
        addAllSystemsToEngine();
 
        // added so components are shown in calls
-       addPlayer();
+       createPlayerComponentsAndAddPlayer();
     }
 
-    private void addPlayer( ) {
+    private void createPlayerComponentsAndAddPlayer( ) {
 
         entityFactory.addPlayer(
                 engine.createComponent(CircleBoundsComponent.class),
                 engine.createComponent(MovementComponent.class),
                 engine.createComponent(PlayerComponent.class),
                 engine.createComponent(PositionComponent.class),
-                engine.createComponent(WorldWrapComponent.class));
+                engine.createComponent(WorldWrapComponent.class),
+                engine.createComponent(DimensionComponent.class),
+                engine.createComponent(TextureComponent.class));
 
     }
 

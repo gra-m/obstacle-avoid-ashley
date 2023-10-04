@@ -2,6 +2,7 @@ package com.obstacleavoid.common;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.assets.AssetManager;
 import com.obstacleavoid.ObstacleAvoidGame;
 import com.obstacleavoid.config.GameConfig;
 import com.obstacleavoid.config.GameDifficulty;

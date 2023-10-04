@@ -13,6 +13,7 @@ public class ObstacleAvoidGame extends Game {
     private SpriteBatch spriteBatch;
     private static final Logger LOG = new Logger(ObstacleAvoidGame.class.getName(), Logger.DEBUG);
 
+    
 	@Override
 	public void create() {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
